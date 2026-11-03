@@ -1,7 +1,7 @@
 @echo off
 chcp 65001 >nul
 cd /d "%~dp0"
-set "REPO=https://github.com/ChuSyMinh/chia-tien.git"
+set "REPO=https://ChuSyMinh@github.com/ChuSyMinh/chia-tien.git"
 where git >nul 2>nul || set "PATH=%PATH%;%ProgramFiles%\Git\cmd"
 where git >nul 2>nul || goto nogit
 
