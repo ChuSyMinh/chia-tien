@@ -1,0 +1,288 @@
+{
+  "settings": {
+    "appName": "Tiền chung",
+    "settleMode": "direct",
+    "transferTemplate": "TIEN CHUNG {thang} {ten}"
+  },
+  "members": [
+    {
+      "id": "nhat",
+      "name": "Nhật",
+      "active": true,
+      "bankBin": "970407",
+      "bankName": "Techcombank",
+      "accountNo": "2626269876",
+      "accountName": "",
+      "phone": "0865098627",
+      "qrMode": "auto"
+    },
+    {
+      "id": "but",
+      "name": "Bụt",
+      "active": true,
+      "bankBin": "970415",
+      "bankName": "VietinBank",
+      "accountNo": "0965326559",
+      "accountName": "",
+      "phone": "0965326559",
+      "qrMode": "auto"
+    },
+    {
+      "id": "phuong",
+      "name": "Phương",
+      "active": true,
+      "bankBin": "970407",
+      "bankName": "Techcombank",
+      "accountNo": "19037025771011",
+      "accountName": "",
+      "phone": "0332138732",
+      "qrMode": "auto"
+    },
+    {
+      "id": "minh",
+      "name": "Minh",
+      "active": true,
+      "bankBin": "970422",
+      "bankName": "MB Bank",
+      "accountNo": "0981733957",
+      "accountName": "",
+      "phone": "0981733957",
+      "qrMode": "auto"
+    },
+    {
+      "id": "nam",
+      "name": "Nam",
+      "active": true,
+      "bankBin": "970422",
+      "bankName": "MB Bank",
+      "accountNo": "8900129112002",
+      "accountName": "",
+      "phone": "0388843069",
+      "qrMode": "auto"
+    }
+  ],
+  "months": {
+    "2026-09": {
+      "members": [
+        "nhat",
+        "but",
+        "phuong",
+        "minh",
+        "nam"
+      ],
+      "expenses": [
+        {
+          "id": "202609s0056",
+          "desc": "Viên tẩy bồn cầu",
+          "buyerId": "nhat",
+          "amount": 58,
+          "participants": [
+            "nhat",
+            "phuong"
+          ],
+          "date": "",
+          "note": ""
+        },
+        {
+          "id": "202609s0154",
+          "desc": "Túi rác",
+          "buyerId": "nam",
+          "amount": 42,
+          "participants": [
+            "nhat",
+            "but",
+            "phuong",
+            "minh",
+            "nam"
+          ],
+          "date": "",
+          "note": ""
+        },
+        {
+          "id": "202609s0256",
+          "desc": "Viên tẩy bồn cầu",
+          "buyerId": "nam",
+          "amount": 27,
+          "participants": [
+            "but",
+            "nam"
+          ],
+          "date": "",
+          "note": ""
+        },
+        {
+          "id": "202609s0367",
+          "desc": "gạo",
+          "buyerId": "but",
+          "amount": 125,
+          "participants": [
+            "but",
+            "minh",
+            "nam"
+          ],
+          "date": "",
+          "note": ""
+        },
+        {
+          "id": "202609s0463",
+          "desc": "chổi quét nhà",
+          "buyerId": "nam",
+          "amount": 75,
+          "participants": [
+            "nhat",
+            "but",
+            "phuong",
+            "minh",
+            "nam"
+          ],
+          "date": "",
+          "note": ""
+        }
+      ],
+      "payments": [],
+      "locked": false
+    },
+    "2026-10": {
+      "members": [
+        "nhat",
+        "but",
+        "phuong",
+        "minh",
+        "nam"
+      ],
+      "expenses": [
+        {
+          "id": "202610s0054",
+          "desc": "Túi rác",
+          "buyerId": "phuong",
+          "amount": 41,
+          "participants": [
+            "nhat",
+            "but",
+            "phuong",
+            "minh",
+            "nam"
+          ],
+          "date": "",
+          "note": ""
+        },
+        {
+          "id": "202610s0167",
+          "desc": "gắp bát nồi chiên",
+          "buyerId": "nhat",
+          "amount": 39,
+          "participants": [
+            "nhat",
+            "but",
+            "phuong",
+            "minh",
+            "nam"
+          ],
+          "date": "",
+          "note": ""
+        },
+        {
+          "id": "202610s0274",
+          "desc": "tẩy bồn cầu t3",
+          "buyerId": "nhat",
+          "amount": 53,
+          "participants": [
+            "nhat",
+            "phuong"
+          ],
+          "date": "",
+          "note": ""
+        },
+        {
+          "id": "202610s0354",
+          "desc": "Tiền sheet t9",
+          "buyerId": "phuong",
+          "amount": 10,
+          "participants": [
+            "minh"
+          ],
+          "date": "",
+          "note": ""
+        },
+        {
+          "id": "202610s0454",
+          "desc": "Thớt +mớ rửa bát",
+          "buyerId": "but",
+          "amount": 110,
+          "participants": [
+            "nhat",
+            "but",
+            "minh",
+            "nam"
+          ],
+          "date": "",
+          "note": ""
+        },
+        {
+          "id": "202610s0547",
+          "desc": "Gạo",
+          "buyerId": "but",
+          "amount": 120,
+          "participants": [
+            "nhat",
+            "but",
+            "minh",
+            "nam"
+          ],
+          "date": "",
+          "note": ""
+        },
+        {
+          "id": "202610s0674",
+          "desc": "tạp hóa",
+          "buyerId": "but",
+          "amount": 25,
+          "participants": [
+            "nam"
+          ],
+          "date": "",
+          "note": ""
+        },
+        {
+          "id": "202610s0774",
+          "desc": "tiền khóa",
+          "buyerId": "nhat",
+          "amount": 25,
+          "participants": [
+            "but"
+          ],
+          "date": "",
+          "note": ""
+        },
+        {
+          "id": "202610s0843",
+          "desc": "Chảo rán",
+          "buyerId": "but",
+          "amount": 100,
+          "participants": [
+            "nhat",
+            "but",
+            "minh",
+            "nam"
+          ],
+          "date": "",
+          "note": ""
+        }
+      ],
+      "payments": [],
+      "locked": false
+    },
+    "2026-11": {
+      "members": [
+        "nhat",
+        "but",
+        "phuong",
+        "minh",
+        "nam"
+      ],
+      "expenses": [],
+      "payments": [],
+      "locked": false
+    }
+  }
+}

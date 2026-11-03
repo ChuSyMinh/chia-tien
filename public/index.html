@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0f766e">
+<title>Tiền chung</title>
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<header class="top">
+  <div class="brand"><img src="/icon.svg" alt="" width="28" height="28"><span id="appName">Tiền chung</span></div>
+  <div class="controls">
+    <label class="ctl">Tháng
+      <select id="monthSel"></select>
+    </label>
+    <button class="btn ghost sm" id="newMonthBtn" title="Tạo tháng mới">+ Tháng</button>
+    <label class="ctl">Tôi là
+      <select id="meSel"><option value="">— chọn —</option></select>
+    </label>
+  </div>
+</header>
+
+<nav class="tabs" id="tabs">
+  <button data-tab="expenses" class="active">Chi tiêu</button>
+  <button data-tab="pay">Thanh toán</button>
+  <button data-tab="people">Thành viên</button>
+  <button data-tab="admin">Quản trị</button>
+</nav>
+
+<main>
+  <div id="lockBanner" class="banner" hidden>Tháng này đã được khoá. Chỉ quản trị viên mới sửa được.</div>
+
+  <!-- CHI TIÊU -->
+  <section id="tab-expenses" class="tab active">
+    <div id="balances" class="balances"></div>
+
+    <form id="expForm" class="card form">
+      <h2 id="expFormTitle">Thêm khoản chi</h2>
+      <div class="grid">
+        <label>Mua gì<input name="desc" required maxlength="200" placeholder="VD: Gạo, túi rác…"></label>
+        <label>Giá (nghìn đồng)<input name="amount" required inputmode="decimal" placeholder="VD: 120"></label>
+        <label>Người mua<select name="buyerId" required></select></label>
+        <label>Ngày<input name="date" type="date"></label>
+      </div>
+      <div class="partHead"><span>Ai dùng chung?</span>
+        <span class="links"><a href="#" id="selAll">Tất cả</a> · <a href="#" id="selNone">Bỏ chọn</a></span></div>
+      <div id="partBox" class="chips"></div>
+      <div class="formFoot">
+        <span id="sharePreview" class="muted"></span>
+        <span class="spacer"></span>
+        <button type="button" class="btn ghost" id="expCancel" hidden>Huỷ sửa</button>
+        <button class="btn primary" id="expSubmit">Thêm</button>
+      </div>
+    </form>
+
+    <div class="card">
+      <div class="cardHead"><h2>Danh sách</h2><span id="totalLbl" class="muted"></span></div>
+      <div class="tableWrap"><table id="expTable" class="sheet"></table></div>
+      <p id="expEmpty" class="empty" hidden>Chưa có khoản chi nào trong tháng này.</p>
+    </div>
+  </section>
+
+  <!-- THANH TOÁN -->
+  <section id="tab-pay" class="tab">
+    <div id="myPay"></div>
+    <div class="card">
+      <div class="cardHead"><h2>Cần chuyển khoản</h2><span id="modeLbl" class="muted"></span></div>
+      <div id="transferList" class="list"></div>
+    </div>
+    <div class="card">
+      <h2>Đã thanh toán</h2>
+      <div id="paymentList" class="list"></div>
+    </div>
+  </section>
+
+  <!-- THÀNH VIÊN -->
+  <section id="tab-people" class="tab">
+    <div id="peopleList" class="people"></div>
+  </section>
+
+  <!-- QUẢN TRỊ -->
+  <section id="tab-admin" class="tab">
+    <form id="loginForm" class="card form narrow">
+      <h2>Đăng nhập quản trị</h2>
+      <label>Mật khẩu<input type="password" name="password" required autocomplete="current-password"></label>
+      <button class="btn primary">Đăng nhập</button>
+    </form>
+    <div id="adminArea" hidden>
+      <div class="card">
+        <div class="cardHead"><h2>Thông tin thanh toán của thành viên</h2><button class="btn primary sm" id="addMemberBtn">+ Thêm thành viên</button></div>
+        <p class="muted">Cấu hình tên, số tài khoản, ngân hàng và mã QR nhận tiền cho từng người. QR “Tự tạo” dùng chuẩn VietQR (tự điền số tiền + nội dung); hoặc tải lên ảnh QR riêng.</p>
+        <div id="memberEditors" class="editors"></div>
+      </div>
+
+      <div class="card form">
+        <h2>Tháng đang xem</h2>
+        <div class="partHead"><span>Thành viên tham gia tháng này</span></div>
+        <div id="monthMembers" class="chips"></div>
+        <label class="check"><input type="checkbox" id="monthLocked"> Khoá tháng (không cho người khác sửa)</label>
+        <div class="formFoot"><button type="button" class="btn danger ghost" id="delMonthBtn">Xoá tháng (nếu trống)</button><span class="spacer"></span><button type="button" class="btn primary" id="saveMonthBtn">Lưu</button></div>
+      </div>
+
+      <form id="settingsForm" class="card form">
+        <h2>Cài đặt chung</h2>
+        <div class="grid">
+          <label>Tên ứng dụng<input name="appName" maxlength="60"></label>
+          <label>Cách thanh toán
+            <select name="settleMode">
+              <option value="direct">Chuyển trực tiếp (ít giao dịch nhất)</option>
+              <option value="treasurer">Qua thủ quỹ</option>
+            </select>
+          </label>
+          <label>Thủ quỹ<select name="treasurerId"></select></label>
+          <label>Mẫu nội dung CK<input name="transferTemplate" maxlength="80" placeholder="TIEN CHUNG {thang} {ten}"></label>
+        </div>
+        <p class="muted small">Biến trong nội dung: <code>{thang}</code> = T10/2026, <code>{ten}</code> = tên người chuyển.</p>
+        <div class="formFoot"><span class="spacer"></span><button class="btn primary">Lưu cài đặt</button></div>
+      </form>
+
+      <form id="pwForm" class="card form">
+        <h2>Đổi mật khẩu quản trị</h2>
+        <div class="grid">
+          <label>Mật khẩu hiện tại<input type="password" name="oldPassword" required autocomplete="current-password"></label>
+          <label>Mật khẩu mới (≥ 6 ký tự)<input type="password" name="newPassword" required minlength="6" autocomplete="new-password"></label>
+        </div>
+        <div class="formFoot"><a class="btn ghost" href="/api/admin/export">Tải bản sao lưu</a><span class="spacer"></span><button class="btn primary">Đổi mật khẩu</button></div>
+      </form>
+      <button class="btn ghost" id="logoutBtn">Đăng xuất</button>
+    </div>
+  </section>
+</main>
+
+<dialog id="qrDlg">
+  <div class="dlgBody" id="qrBody"></div>
+  <form method="dialog"><button class="btn ghost full">Đóng</button></form>
+</dialog>
+<div id="toast" class="toast" hidden></div>
+<template id="memberTpl">
+  <form class="editor">
+    <div class="edHead"><input name="name" class="nameInp" placeholder="Tên hiển thị" required maxlength="50">
+      <label class="check sm"><input type="checkbox" name="active"> Đang ở</label></div>
+    <div class="grid">
+      <label>Ngân hàng<select name="bankBin"></select></label>
+      <label>Số tài khoản<input name="accountNo" inputmode="numeric" maxlength="30"></label>
+      <label>Tên chủ tài khoản<input name="accountName" maxlength="60" placeholder="NGUYEN VAN A"></label>
+      <label>SĐT<input name="phone" inputmode="tel" maxlength="20"></label>
+    </div>
+    <div class="qrRow">
+      <div class="qrPrev"></div>
+      <div class="qrOpts">
+        <span class="lbl">Mã QR nhận tiền</span>
+        <label class="check sm"><input type="radio" value="auto"> Tự tạo VietQR</label>
+        <label class="check sm"><input type="radio" value="image"> Dùng ảnh tải lên</label>
+        <label class="check sm"><input type="radio" value="none"> Không hiện QR</label>
+        <div class="row"><label class="btn ghost sm upl">Tải ảnh QR…<input type="file" accept="image/png,image/jpeg,image/webp" hidden></label>
+          <button type="button" class="btn ghost sm delQr">Xoá ảnh</button></div>
+      </div>
+    </div>
+    <div class="formFoot"><button type="button" class="btn danger ghost sm delMem">Xoá</button><span class="spacer"></span><button class="btn primary sm">Lưu</button></div>
+  </form>
+</template>
+<script src="/app.js"></script>
+</body>
+</html>

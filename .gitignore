@@ -1,0 +1,4 @@
+# Du lieu that (thanh vien, giao dich, mat khau admin da ma hoa) - khong dua len git
+data/
+node_modules/
+*.log
